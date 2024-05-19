@@ -1,4 +1,4 @@
-const BaseUrl = "https://malamute-enabled-yak.ngrok-free.app"
+const BaseUrl = "http://163.172.177.98:8081"
 
 export const Endpoints = {
     Register: BaseUrl + "/auth/register",

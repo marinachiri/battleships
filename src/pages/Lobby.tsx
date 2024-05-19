@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Button, Alert, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { Endpoints } from '../constants/Endpoints';
@@ -77,7 +77,7 @@ export default function Lobby() {
   const renderGames = () => {
     return games.map((game) => (
       <View key={game.id} style={styles.gameItem}>
-        <Text>{game.player1.email}</Text>
+        <Text>{game.player1.email}'s game</Text>
         <Button title="Join Game" onPress={() => handleJoinGame(game.id)} />
       </View>
     ));
@@ -103,7 +103,9 @@ export default function Lobby() {
     <View style={styles.container}>
       <CreateGameForm onGameCreated={handleGameCreated} />
       {games.length > 0 ? (
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}
+                    scrollEnabled={true}
+                    nestedScrollEnabled={true}>
           {renderGames()}
         </ScrollView>
       ) : (
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   scrollViewContent: {
-    flexGrow: 1,
+    height: Dimensions.get('window').height - 220,
     paddingBottom: 20,
   },
   gameItem: {
